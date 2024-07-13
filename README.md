@@ -14,9 +14,9 @@
    - Buat file `.env` di root project dan tambahkan konfigurasi database:
      ```plaintext
      DB_HOST=127.0.0.1
-     DB_USER=postgres
-     DB_PASSWORD=postgres
-     DB_NAME=backend_assignment
+     DB_USER=(sesuaikan dengan username anda)
+     DB_PASSWORD=(sesuaikan dengan password anda)
+     DB_NAME=backend_assignment (opsional dapat gunakan nama db lain)
      DB_PORT=5432
      DB_DIALECT=postgres
      PORT=3000
@@ -32,14 +32,14 @@
      - `Host name/address`: `localhost`
      - `Port`: `5432`
      - `Maintenance database`: `postgres`
-     - `Username`: `postgres`
+     - `Username`: (sesuaikan dengan username anda)
      - `Password`: (isi dengan password PostgreSQL Anda)
    - Klik `Save`.
 
 4. **Buat Database Baru**:
    - Klik kanan pada server yang baru dibuat.
    - Pilih `Create` > `Database`.
-   - Masukkan nama database (`backend_assignment`) dan klik `Save`.
+   - Masukkan nama database cth: (`backend_assignment`) dan klik `Save`.
 
 5. **Import Database Dump**:
    - Klik kanan pada database yang baru saja Anda buat (`backend_assignment`).
