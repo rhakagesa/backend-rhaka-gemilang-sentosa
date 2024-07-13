@@ -27,13 +27,14 @@ service
 -auth (ALL DONE)
     -login
     -logout
--merchant
+-merchant (ALL DONE)
     -getallprod
     -addprod
     -getprodbyid
     -updateprod
     -deleteprod 
 -customer
+    -
 =========================
 controller
 -auth (ALL DONE)
@@ -44,7 +45,7 @@ controller
         -payload
     -logout
         -delete jwt inside cookies
--merchant 
+-merchant (ALL DONE)
     -crud product
         -GET
             -getall
