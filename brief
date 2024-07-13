@@ -24,12 +24,19 @@ orderitem (ALL DONE)
 -orderid
 =========================
 service
--auth
--admin
+-auth (ALL DONE)
+    -login
+    -logout
+-merchant
+    -getallprod
+    -addprod
+    -getprodbyid
+    -updateprod
+    -deleteprod 
 -customer
 =========================
 controller
--auth
+-auth (ALL DONE)
     -register
         -retrive infodata after regist
     -login
@@ -37,7 +44,7 @@ controller
         -payload
     -logout
         -delete jwt inside cookies
--admin
+-merchant 
     -crud product
         -GET
             -getall
