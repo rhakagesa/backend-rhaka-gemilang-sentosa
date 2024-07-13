@@ -1,0 +1,2258 @@
+{
+	"info": {
+		"_postman_id": "719617ee-e344-4766-93dc-1e7a68111d89",
+		"name": "Backend Developer Test",
+		"description": "Backend Developer Task\n\n- Must login first to get access all end points except register\n    \n- Using authorization for access end point",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"_exporter_id": "32398539"
+	},
+	"item": [
+		{
+			"name": "Auth",
+			"item": [
+				{
+					"name": "Register",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Response status code is 201\", function () {",
+									"  pm.expect(pm.response.code).to.equal(201);",
+									"});",
+									"",
+									"",
+									"pm.test(\"Response time is less than 200ms\", function () {",
+									"  pm.expect(pm.response.responseTime).to.be.below(200);",
+									"});",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "name",
+									"value": "Toko Hijau",
+									"type": "text"
+								},
+								{
+									"key": "username",
+									"value": "merchant1",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "merchant1",
+									"type": "text"
+								},
+								{
+									"key": "role",
+									"value": "merchant",
+									"description": "must fill with \"customer\" or \"merchant\"",
+									"type": "text"
+								}
+							]
+						},
+						"url": "http://localhost:3000/api/auth/register"
+					},
+					"response": [
+						{
+							"name": "Same Username",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": [
+										{
+											"key": "name",
+											"value": "Toko Hijau",
+											"type": "text"
+										},
+										{
+											"key": "username",
+											"value": "merchant1",
+											"type": "text"
+										},
+										{
+											"key": "password",
+											"value": "merchant1",
+											"type": "text"
+										},
+										{
+											"key": "role",
+											"value": "merchant",
+											"description": "must fill with \"customer\" or \"merchant\"",
+											"type": "text"
+										}
+									]
+								},
+								"url": "http://localhost:3000/api/auth/register"
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "37"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"25-jIhYVOZQ3aQM1EE70OspfL6IBmk\""
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 13 Jul 2024 12:51:17 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"username already exists\"\n}"
+						},
+						{
+							"name": "Success",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": [
+										{
+											"key": "name",
+											"value": "Toko Orange",
+											"type": "text"
+										},
+										{
+											"key": "username",
+											"value": "merchant2",
+											"type": "text"
+										},
+										{
+											"key": "password",
+											"value": "merchant2",
+											"type": "text"
+										},
+										{
+											"key": "role",
+											"value": "merchant",
+											"description": "must fill with \"customer\" or \"merchant\"",
+											"type": "text"
+										}
+									]
+								},
+								"url": "http://localhost:3000/api/auth/register"
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "260"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"104-l0WH1QZiwVGsT3O8idozPsI79Zo\""
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 13 Jul 2024 12:52:47 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"register success\",\n    \"data\": {\n        \"id\": 5,\n        \"name\": \"Toko Orange\",\n        \"username\": \"merchant2\",\n        \"password\": \"$2b$10$3UPkTdp4/4smDxFymikZoOecnnnmnnQEi7IYjhVzeQ.0CuKuDC0Vu\",\n        \"role\": \"merchant\",\n        \"updatedAt\": \"2024-07-13T12:52:47.820Z\",\n        \"createdAt\": \"2024-07-13T12:52:47.820Z\"\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "Login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "username",
+									"value": "merchant1",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "merchant1",
+									"type": "text"
+								}
+							]
+						},
+						"url": "http://localhost:3000/api/auth/login"
+					},
+					"response": [
+						{
+							"name": "Not Registered",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": [
+										{
+											"key": "username",
+											"value": "merchant",
+											"type": "text"
+										},
+										{
+											"key": "password",
+											"value": "merchant2",
+											"type": "text"
+										}
+									]
+								},
+								"url": "http://localhost:3000/api/auth/login"
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "32"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"20-ieIwnOqHR5OnNrGm4L2JMUYR7YM\""
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 13 Jul 2024 12:53:16 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"username not found\"\n}"
+						},
+						{
+							"name": "Invalid Password",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": [
+										{
+											"key": "username",
+											"value": "merchant2",
+											"type": "text"
+										},
+										{
+											"key": "password",
+											"value": "merchant",
+											"type": "text"
+										}
+									]
+								},
+								"url": "http://localhost:3000/api/auth/login"
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "32"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"20-H0D+EVKWuEPKetdN7hDpwxCw4U4\""
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 13 Jul 2024 12:53:44 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"password not match\"\n}"
+						},
+						{
+							"name": "Success",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": [
+										{
+											"key": "username",
+											"value": "merchant2",
+											"type": "text"
+										},
+										{
+											"key": "password",
+											"value": "merchant2",
+											"type": "text"
+										}
+									]
+								},
+								"url": "http://localhost:3000/api/auth/login"
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Set-Cookie",
+									"value": "jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NSwibmFtZSI6IlRva28gT3JhbmdlIiwidXNlcm5hbWUiOiJtZXJjaGFudDIiLCJyb2xlIjoibWVyY2hhbnQiLCJpYXQiOjE3MjA4NzUyNDMsImV4cCI6MTcyMDg3ODg0M30.h10lYdBaJY4cCGTLvI-GZ6l1euwt9K5amsRchDS-9u8; Path=/"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "68"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"44-EAnNyPSnmbLibmaNvwPMoEpLKkU\""
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 13 Jul 2024 12:54:03 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"login success\",\n    \"username\": \"merchant2\",\n    \"role\": \"merchant\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Logout",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": []
+						},
+						"url": "http://localhost:3000/api/auth/logout"
+					},
+					"response": [
+						{
+							"name": "Success",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": []
+								},
+								"url": "http://localhost:3000/api/auth/logout"
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Set-Cookie",
+									"value": "jwt=; Path=/; Expires=Thu, 01 Jan 1970 00:00:00 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "28"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"1c-ly2C9YqwX619sG4usmFsDNQF3oc\""
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 13 Jul 2024 12:54:17 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"logout success\"\n}"
+						},
+						{
+							"name": "Must Login",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": []
+								},
+								"url": "http://localhost:3000/api/auth/logout"
+							},
+							"status": "Unauthorized",
+							"code": 401,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "48"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"30-5NtZC4Mof91XhfYrIBDNxRTYANs\""
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 13 Jul 2024 12:54:37 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"must login first / token not found\"\n}"
+						}
+					]
+				}
+			],
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"packages": {},
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"packages": {},
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "Merchant",
+			"item": [
+				{
+					"name": "Add Product",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Successful POST request\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
+									"});",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "itemName",
+									"value": "Kaos Katun",
+									"type": "text"
+								},
+								{
+									"key": "price",
+									"value": "45000",
+									"type": "text"
+								}
+							]
+						},
+						"url": "http://localhost:3000/api/merchant/addproduct"
+					},
+					"response": [
+						{
+							"name": "Success",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": [
+										{
+											"key": "itemName",
+											"value": "Kaos Katun",
+											"type": "text"
+										},
+										{
+											"key": "price",
+											"value": "45000",
+											"type": "text"
+										}
+									]
+								},
+								"url": "http://localhost:3000/api/merchant/addproduct"
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "166"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"a6-zD4kTAXftpCYgJXjF7alz6UrbUg\""
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 13 Jul 2024 12:55:36 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"add product success\",\n    \"data\": {\n        \"id\": 12,\n        \"itemName\": \"Kaos Katun\",\n        \"price\": 45000,\n        \"updatedAt\": \"2024-07-13T12:55:36.639Z\",\n        \"createdAt\": \"2024-07-13T12:55:36.639Z\"\n    }\n}"
+						},
+						{
+							"name": "Fail",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": [
+										{
+											"key": "itemName",
+											"value": "Kaos Katun",
+											"type": "text",
+											"disabled": true
+										},
+										{
+											"key": "price",
+											"value": "45000",
+											"type": "text"
+										}
+									]
+								},
+								"url": "http://localhost:3000/api/merchant/addproduct"
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "42"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"2a-BXIXB0dhMYkmR9FAYp+RoHshZFk\""
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 13 Jul 2024 12:58:11 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"item name and price required\"\n}"
+						},
+						{
+							"name": "Duplicate Item",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": [
+										{
+											"key": "itemName",
+											"value": "Kaos Katun",
+											"type": "text"
+										},
+										{
+											"key": "price",
+											"value": "45000",
+											"type": "text"
+										}
+									]
+								},
+								"url": "http://localhost:3000/api/merchant/addproduct"
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "36"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"24-yAkXY1kiG3Sw54qLuFHBvztEYHw\""
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 13 Jul 2024 13:00:21 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"product already exists\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Edit Product",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Successful POST request\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
+									"});",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "itemName",
+									"value": "Kaos Katun",
+									"type": "text"
+								},
+								{
+									"key": "price",
+									"value": "5000",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/merchant/product?id=11",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"merchant",
+								"product"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "11"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Product Not Found",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": [
+										{
+											"key": "itemName",
+											"value": "Bakso Goreng Pedas",
+											"type": "text"
+										},
+										{
+											"key": "price",
+											"value": "5000",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "http://localhost:3000/api/merchant/product?id=8",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"api",
+										"merchant",
+										"product"
+									],
+									"query": [
+										{
+											"key": "id",
+											"value": "8"
+										}
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "31"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"1f-XgDkWNs1rCSLMPNzWrD/rZpWT60\""
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 13 Jul 2024 12:58:35 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"product not found\"\n}"
+						},
+						{
+							"name": "Success",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": [
+										{
+											"key": "itemName",
+											"value": "Bakso Goreng Pedas",
+											"type": "text"
+										},
+										{
+											"key": "price",
+											"value": "5000",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "http://localhost:3000/api/merchant/product?id=11",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"api",
+										"merchant",
+										"product"
+									],
+									"query": [
+										{
+											"key": "id",
+											"value": "11"
+										}
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "45"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"2d-/m5Doz7x4sgAzBQFzUk4qFp2OvI\""
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 13 Jul 2024 12:58:56 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"edit product success\",\n    \"data\": [\n        1\n    ]\n}"
+						},
+						{
+							"name": "Bad Request",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": [
+										{
+											"key": "itemName",
+											"value": "Bakso Goreng Pedas",
+											"type": "text",
+											"disabled": true
+										},
+										{
+											"key": "price",
+											"value": "5000",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "http://localhost:3000/api/merchant/product?id=11",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"api",
+										"merchant",
+										"product"
+									],
+									"query": [
+										{
+											"key": "id",
+											"value": "11"
+										}
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "42"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"2a-BXIXB0dhMYkmR9FAYp+RoHshZFk\""
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 13 Jul 2024 12:59:23 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"item name and price required\"\n}"
+						},
+						{
+							"name": "Duplicate Item",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": [
+										{
+											"key": "itemName",
+											"value": "Kaos Katun",
+											"type": "text"
+										},
+										{
+											"key": "price",
+											"value": "5000",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "http://localhost:3000/api/merchant/product?id=11",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"api",
+										"merchant",
+										"product"
+									],
+									"query": [
+										{
+											"key": "id",
+											"value": "11"
+										}
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "36"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"24-yAkXY1kiG3Sw54qLuFHBvztEYHw\""
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 13 Jul 2024 13:00:01 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"product already exists\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Delete Product",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Successful POST request\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
+									"});",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": []
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/merchant/product?id=11",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"merchant",
+								"product"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "11"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Not Found",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"name\": \"Add your name in the body\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:3000/api/merchant/product?id=8",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"api",
+										"merchant",
+										"product"
+									],
+									"query": [
+										{
+											"key": "id",
+											"value": "8"
+										}
+									]
+								}
+							},
+							"status": "Internal Server Error",
+							"code": 500,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "31"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"1f-XgDkWNs1rCSLMPNzWrD/rZpWT60\""
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 13 Jul 2024 13:00:50 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"product not found\"\n}"
+						},
+						{
+							"name": "Success",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"name\": \"Add your name in the body\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:3000/api/merchant/product?id=11",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"api",
+										"merchant",
+										"product"
+									],
+									"query": [
+										{
+											"key": "id",
+											"value": "11"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "45"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"2d-93cIqtZjVHrAT2gLwmz/w3J0zoE\""
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 13 Jul 2024 13:01:13 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"delete product success\",\n    \"data\": 1\n}"
+						}
+					]
+				},
+				{
+					"name": "Product By Id",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": []
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/merchant/product?id=11",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"merchant",
+								"product"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "11"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Success",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": []
+								},
+								"url": {
+									"raw": "http://localhost:3000/api/merchant/product?id=6",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"api",
+										"merchant",
+										"product"
+									],
+									"query": [
+										{
+											"key": "id",
+											"value": "6"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "166"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"a6-FBwokQSXJVeG9bX+wWqoeq3Ohk8\""
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 13 Jul 2024 13:03:24 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"get product success\",\n    \"data\": {\n        \"id\": 6,\n        \"itemName\": \"Parfum Pria\",\n        \"price\": 30000,\n        \"createdAt\": \"2024-07-13T06:47:20.969Z\",\n        \"updatedAt\": \"2024-07-13T06:47:20.969Z\"\n    }\n}"
+						},
+						{
+							"name": "Not Found",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": []
+								},
+								"url": {
+									"raw": "http://localhost:3000/api/merchant/product?id=11",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"api",
+										"merchant",
+										"product"
+									],
+									"query": [
+										{
+											"key": "id",
+											"value": "11"
+										}
+									]
+								}
+							},
+							"status": "Internal Server Error",
+							"code": 500,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "31"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"1f-XgDkWNs1rCSLMPNzWrD/rZpWT60\""
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 13 Jul 2024 13:03:41 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"product not found\"\n}"
+						}
+					]
+				},
+				{
+					"name": "All Product",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": []
+						},
+						"url": "http://localhost:3000/api/merchant/products"
+					},
+					"response": [
+						{
+							"name": "Success",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": []
+								},
+								"url": "http://localhost:3000/api/merchant/products"
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "1304"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"518-TZj3zmBQETV8puZRoiIwoCD81Ys\""
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 13 Jul 2024 13:03:59 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"get all products success\",\n    \"data\": [\n        {\n            \"id\": 1,\n            \"itemName\": \"Sosis Frozen\",\n            \"price\": 5000,\n            \"createdAt\": \"2024-07-13T06:45:37.305Z\",\n            \"updatedAt\": \"2024-07-13T06:45:37.305Z\"\n        },\n        {\n            \"id\": 2,\n            \"itemName\": \"Bakso Frozen\",\n            \"price\": 7000,\n            \"createdAt\": \"2024-07-13T06:46:01.916Z\",\n            \"updatedAt\": \"2024-07-13T06:46:01.916Z\"\n        },\n        {\n            \"id\": 3,\n            \"itemName\": \"Ice Cream\",\n            \"price\": 3000,\n            \"createdAt\": \"2024-07-13T06:46:19.105Z\",\n            \"updatedAt\": \"2024-07-13T06:46:19.105Z\"\n        },\n        {\n            \"id\": 4,\n            \"itemName\": \"Susu UHT 125ml\",\n            \"price\": 3000,\n            \"createdAt\": \"2024-07-13T06:46:53.964Z\",\n            \"updatedAt\": \"2024-07-13T06:46:53.964Z\"\n        },\n        {\n            \"id\": 5,\n            \"itemName\": \"Susu UHT 1L\",\n            \"price\": 20000,\n            \"createdAt\": \"2024-07-13T06:47:03.557Z\",\n            \"updatedAt\": \"2024-07-13T06:47:03.557Z\"\n        },\n        {\n            \"id\": 6,\n            \"itemName\": \"Parfum Pria\",\n            \"price\": 30000,\n            \"createdAt\": \"2024-07-13T06:47:20.969Z\",\n            \"updatedAt\": \"2024-07-13T06:47:20.969Z\"\n        },\n        {\n            \"id\": 7,\n            \"itemName\": \"Parfum Wanita\",\n            \"price\": 35000,\n            \"createdAt\": \"2024-07-13T06:47:30.177Z\",\n            \"updatedAt\": \"2024-07-13T06:47:30.177Z\"\n        },\n        {\n            \"id\": 9,\n            \"itemName\": \"Sabun Cair\",\n            \"price\": 10000,\n            \"createdAt\": \"2024-07-13T10:13:57.035Z\",\n            \"updatedAt\": \"2024-07-13T10:13:57.035Z\"\n        },\n        {\n            \"id\": 10,\n            \"itemName\": \"Shampoo\",\n            \"price\": 25000,\n            \"createdAt\": \"2024-07-13T10:14:17.331Z\",\n            \"updatedAt\": \"2024-07-13T10:14:17.331Z\"\n        },\n        {\n            \"id\": 12,\n            \"itemName\": \"Kaos Katun\",\n            \"price\": 45000,\n            \"createdAt\": \"2024-07-13T12:55:36.639Z\",\n            \"updatedAt\": \"2024-07-13T12:55:36.639Z\"\n        }\n    ]\n}"
+						}
+					]
+				},
+				{
+					"name": "All Order",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": []
+						},
+						"url": "http://localhost:3000/api/merchant/orders"
+					},
+					"response": [
+						{
+							"name": "Not Found",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": []
+								},
+								"url": "http://localhost:3000/api/merchant/orders"
+							},
+							"status": "Internal Server Error",
+							"code": 500,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "28"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"1c-T7+fKlZCz4sAHOr9zRPW9V9KqTw\""
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 13 Jul 2024 13:05:47 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"order is empty\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Order Detail",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": []
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/merchant/order?id=1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"merchant",
+								"order"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Not Found",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": []
+								},
+								"url": {
+									"raw": "http://localhost:3000/api/merchant/order?id=1",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"api",
+										"merchant",
+										"order"
+									],
+									"query": [
+										{
+											"key": "id",
+											"value": "1"
+										}
+									]
+								}
+							},
+							"status": "Internal Server Error",
+							"code": 500,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "34"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"22-IHGYm2kZf0wBjacQ6k5WnFxbnqY\""
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 13 Jul 2024 13:06:10 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"order items is empty\"\n}"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Customer",
+			"item": [
+				{
+					"name": "Add to Cart",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Successful POST request\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
+									"});",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "qty",
+									"value": "3",
+									"description": "\"default value is 1\"",
+									"type": "text",
+									"disabled": true
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/customer/addtocart?id=1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"customer",
+								"addtocart"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Success",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": [
+										{
+											"key": "qty",
+											"value": "3",
+											"type": "text",
+											"disabled": true
+										}
+									]
+								},
+								"url": {
+									"raw": "http://localhost:3000/api/customer/addtocart?id=10",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"api",
+										"customer",
+										"addtocart"
+									],
+									"query": [
+										{
+											"key": "id",
+											"value": "10"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "280"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"118-FNAc6WrJrs5XyB0D5rztIiicbS0\""
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 13 Jul 2024 13:07:52 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"add to cart success\",\n    \"data\": [\n        {\n            \"productName\": \"Sosis Frozen\",\n            \"totalItemPrice\": 15000,\n            \"qty\": 3\n        },\n        {\n            \"productName\": \"Ice Cream\",\n            \"totalItemPrice\": 3000,\n            \"qty\": 1\n        },\n        {\n            \"productName\": \"Parfum Pria\",\n            \"totalItemPrice\": 30000,\n            \"qty\": 1\n        },\n        {\n            \"productName\": \"Shampoo\",\n            \"totalItemPrice\": 25000,\n            \"qty\": 1\n        }\n    ]\n}"
+						},
+						{
+							"name": "Not Found",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": [
+										{
+											"key": "qty",
+											"value": "3",
+											"type": "text",
+											"disabled": true
+										}
+									]
+								},
+								"url": {
+									"raw": "http://localhost:3000/api/customer/addtocart?id=8",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"api",
+										"customer",
+										"addtocart"
+									],
+									"query": [
+										{
+											"key": "id",
+											"value": "8"
+										}
+									]
+								}
+							},
+							"status": "Internal Server Error",
+							"code": 500,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "31"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"1f-XgDkWNs1rCSLMPNzWrD/rZpWT60\""
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 13 Jul 2024 13:08:10 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"product not found\"\n}"
+						}
+					]
+				},
+				{
+					"name": "All Product",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": []
+						},
+						"url": "http://localhost:3000/api/customer/products"
+					},
+					"response": [
+						{
+							"name": "Success",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": []
+								},
+								"url": "http://localhost:3000/api/customer/products"
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "1304"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"518-TZj3zmBQETV8puZRoiIwoCD81Ys\""
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 13 Jul 2024 13:08:36 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"get all products success\",\n    \"data\": [\n        {\n            \"id\": 1,\n            \"itemName\": \"Sosis Frozen\",\n            \"price\": 5000,\n            \"createdAt\": \"2024-07-13T06:45:37.305Z\",\n            \"updatedAt\": \"2024-07-13T06:45:37.305Z\"\n        },\n        {\n            \"id\": 2,\n            \"itemName\": \"Bakso Frozen\",\n            \"price\": 7000,\n            \"createdAt\": \"2024-07-13T06:46:01.916Z\",\n            \"updatedAt\": \"2024-07-13T06:46:01.916Z\"\n        },\n        {\n            \"id\": 3,\n            \"itemName\": \"Ice Cream\",\n            \"price\": 3000,\n            \"createdAt\": \"2024-07-13T06:46:19.105Z\",\n            \"updatedAt\": \"2024-07-13T06:46:19.105Z\"\n        },\n        {\n            \"id\": 4,\n            \"itemName\": \"Susu UHT 125ml\",\n            \"price\": 3000,\n            \"createdAt\": \"2024-07-13T06:46:53.964Z\",\n            \"updatedAt\": \"2024-07-13T06:46:53.964Z\"\n        },\n        {\n            \"id\": 5,\n            \"itemName\": \"Susu UHT 1L\",\n            \"price\": 20000,\n            \"createdAt\": \"2024-07-13T06:47:03.557Z\",\n            \"updatedAt\": \"2024-07-13T06:47:03.557Z\"\n        },\n        {\n            \"id\": 6,\n            \"itemName\": \"Parfum Pria\",\n            \"price\": 30000,\n            \"createdAt\": \"2024-07-13T06:47:20.969Z\",\n            \"updatedAt\": \"2024-07-13T06:47:20.969Z\"\n        },\n        {\n            \"id\": 7,\n            \"itemName\": \"Parfum Wanita\",\n            \"price\": 35000,\n            \"createdAt\": \"2024-07-13T06:47:30.177Z\",\n            \"updatedAt\": \"2024-07-13T06:47:30.177Z\"\n        },\n        {\n            \"id\": 9,\n            \"itemName\": \"Sabun Cair\",\n            \"price\": 10000,\n            \"createdAt\": \"2024-07-13T10:13:57.035Z\",\n            \"updatedAt\": \"2024-07-13T10:13:57.035Z\"\n        },\n        {\n            \"id\": 10,\n            \"itemName\": \"Shampoo\",\n            \"price\": 25000,\n            \"createdAt\": \"2024-07-13T10:14:17.331Z\",\n            \"updatedAt\": \"2024-07-13T10:14:17.331Z\"\n        },\n        {\n            \"id\": 12,\n            \"itemName\": \"Kaos Katun\",\n            \"price\": 45000,\n            \"createdAt\": \"2024-07-13T12:55:36.639Z\",\n            \"updatedAt\": \"2024-07-13T12:55:36.639Z\"\n        }\n    ]\n}"
+						}
+					]
+				},
+				{
+					"name": "Checkout",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Successful POST request\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
+									"});",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": []
+						},
+						"url": "http://localhost:3000/api/customer/checkout"
+					},
+					"response": [
+						{
+							"name": "Success 1",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": [
+										{
+											"key": "qty",
+											"value": "",
+											"type": "text"
+										}
+									]
+								},
+								"url": "http://localhost:3000/api/customer/checkout"
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "212"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"d4-qgzSZMoJ6r3vuuUmtgoJimjCZEY\""
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 13 Jul 2024 13:08:54 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"checkout success\",\n    \"data\": {\n        \"id\": 5,\n        \"customerName\": \"Jack\",\n        \"totalPrice\": \"68400\",\n        \"discount\": 7600,\n        \"freeongkir\": true,\n        \"userId\": 3,\n        \"updatedAt\": \"2024-07-13T13:08:54.436Z\",\n        \"createdAt\": \"2024-07-13T13:08:54.436Z\"\n    }\n}"
+						},
+						{
+							"name": "Fail",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": [
+										{
+											"key": "qty",
+											"value": "",
+											"type": "text"
+										}
+									]
+								},
+								"url": "http://localhost:3000/api/customer/checkout"
+							},
+							"status": "Internal Server Error",
+							"code": 500,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "27"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"1b-+BTqhZH8M295pCIQ9Qe3zFUH1sY\""
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 13 Jul 2024 13:10:52 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"cart is empty\"\n}"
+						},
+						{
+							"name": "Success 2",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": [
+										{
+											"key": "qty",
+											"value": "",
+											"type": "text"
+										}
+									]
+								},
+								"url": "http://localhost:3000/api/customer/checkout"
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "210"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"d2-4Cd7y5tTQtN7jLxOpqt4YaNb6hI\""
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 13 Jul 2024 13:12:08 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"checkout success\",\n    \"data\": {\n        \"id\": 7,\n        \"customerName\": \"Jack\",\n        \"totalPrice\": \"12000\",\n        \"discount\": 0,\n        \"freeongkir\": false,\n        \"userId\": 3,\n        \"updatedAt\": \"2024-07-13T13:12:08.088Z\",\n        \"createdAt\": \"2024-07-13T13:12:08.088Z\"\n    }\n}"
+						},
+						{
+							"name": "Success 3",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": [
+										{
+											"key": "qty",
+											"value": "",
+											"type": "text"
+										}
+									]
+								},
+								"url": "http://localhost:3000/api/customer/checkout"
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "210"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"d2-VHvBYIyRyQ3s4asuCpY1Aa1a298\""
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 13 Jul 2024 13:14:45 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"checkout success\",\n    \"data\": {\n        \"id\": 8,\n        \"customerName\": \"Jhon\",\n        \"totalPrice\": \"15000\",\n        \"discount\": 0,\n        \"freeongkir\": false,\n        \"userId\": 1,\n        \"updatedAt\": \"2024-07-13T13:14:45.072Z\",\n        \"createdAt\": \"2024-07-13T13:14:45.072Z\"\n    }\n}"
+						}
+					]
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "id",
+			"value": "1"
+		},
+		{
+			"key": "base_url",
+			"value": "https://postman-rest-api-learner.glitch.me/"
+		}
+	]
+}
