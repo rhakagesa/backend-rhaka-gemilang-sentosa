@@ -2,21 +2,22 @@
 
 const { hashPassword, comparePassword } = require("../utils/bcrypt");
 const { generateToken } = require("../utils/jwt");
-const UserRepository = require("../models").User;
+const userRepository = require("../models").User;
 
-module.exports = class AuthService {
+module.exports = class authService {
   static async register(data) {
-    const { username, password, role } = data;
-    if (!username || !password || !role)
-      throw new Error("username, password and role required");
+    const { name, username, password, role } = data;
+    if (!name || !username || !password || !role)
+      throw new Error("name, username, password and role required");
 
-    const user = await UserRepository.findOne({
+    const user = await userRepository.findOne({
       where: { username: username },
     });
     if (user) throw new Error("username already exists");
 
     const hash = hashPassword(password);
-    const newUser = await UserRepository.create({
+    const newUser = await userRepository.create({
+      name: name,
       username: username,
       password: hash,
       role: role,
@@ -29,7 +30,7 @@ module.exports = class AuthService {
     if (!username || !password)
       throw new Error("username and password required");
 
-    const user = await UserRepository.findOne({ where: { username } });
+    const user = await userRepository.findOne({ where: { username } });
     if (!user) throw new Error("username not found");
 
     const passwordMatch = comparePassword(user.password, password);
@@ -37,6 +38,7 @@ module.exports = class AuthService {
 
     const payload = {
       id: user.id,
+      name: user.name,
       username: user.username,
       role: user.role,
     };

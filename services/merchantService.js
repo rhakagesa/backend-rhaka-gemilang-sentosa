@@ -4,7 +4,7 @@ const productRepository = require("../models").Product;
 const orderRepository = require("../models").Order;
 const orderItemRepository = require("../models").OrderItem;
 
-module.exports = class MerchantService {
+module.exports = class merchantService {
   static async addProduct(data) {
     const { itemName, price } = data;
     if (!itemName || !price) throw new Error("item name and price required");

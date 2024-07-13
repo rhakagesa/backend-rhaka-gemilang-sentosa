@@ -2,7 +2,7 @@
 
 const merchantService = require("../services/merchantService");
 
-module.exports = class MerchantController {
+module.exports = class merchantController {
   static async addProduct(req, res, next) {
     const reqData = {
       itemName: req.body.itemName,

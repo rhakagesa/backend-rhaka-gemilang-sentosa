@@ -6,7 +6,10 @@ module.exports = class customerController {
   static async getAllProducts(req, res) {
     try {
       const products = await customerService.getAllProducts();
-      res.send(products);
+      res.status(200).json({
+        message: "get all products success",
+        data: products,
+      });
     } catch (err) {
       next({ status: 500, message: err.message });
     }
@@ -19,7 +22,7 @@ module.exports = class customerController {
     };
     try {
       const result = await customerService.addToCart(reqData);
-      res.status(201).json({
+      res.status(200).json({
         message: "add to cart success",
         data: result,
       });

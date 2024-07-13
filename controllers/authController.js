@@ -1,17 +1,18 @@
 "use strict";
 
-const AuthService = require("../services/authService");
+const authService = require("../services/authService");
 
-module.exports = class AuthController {
+module.exports = class authController {
   static async register(req, res, next) {
     const reqData = {
+      name: req.body.name,
       username: req.body.username,
       password: req.body.password,
       role: req.body.role,
     };
 
     try {
-      const result = await AuthService.register(reqData);
+      const result = await authService.register(reqData);
       res.status(201).json({
         message: "register success",
         data: result,
@@ -28,7 +29,7 @@ module.exports = class AuthController {
     };
 
     try {
-      const result = await AuthService.login(reqData);
+      const result = await authService.login(reqData);
       res.cookie("jwt", result.token).status(200).json({
         message: "login success",
         username: result.payload.username,

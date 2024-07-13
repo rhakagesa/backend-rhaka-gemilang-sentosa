@@ -5,7 +5,6 @@ const orderRepository = require("../models").Order;
 const productRepository = require("../models").Product;
 
 let cart = [];
-const discount = 10;
 
 module.exports = class customerService {
   static async getAllProducts() {
@@ -51,7 +50,7 @@ module.exports = class customerService {
     }, 0);
 
     const orderData = {
-      customerName: session.username,
+      customerName: session.name,
       totalPrice: calcPrice,
       discount: 0,
       freeongkir: false,
@@ -60,7 +59,7 @@ module.exports = class customerService {
 
     if (calcPrice > 15000) orderData.freeongkir = true;
     if (calcPrice > 50000) {
-      orderData.discount = calcPrice * (discount / 100);
+      orderData.discount = calcPrice * (10 / 100);
       orderData.totalPrice = calcPrice - orderData.discount;
     }
 
