@@ -16,7 +16,7 @@
      DB_HOST=127.0.0.1
      DB_USER=postgres
      DB_PASSWORD=postgres
-     DB_NAME=backend_interview_assignment
+     DB_NAME=backend_assignment
      DB_PORT=5432
      DB_DIALECT=postgres
      PORT=3000
@@ -39,10 +39,10 @@
 4. **Buat Database Baru**:
    - Klik kanan pada server yang baru dibuat.
    - Pilih `Create` > `Database`.
-   - Masukkan nama database (`backend_interview_assignment`) dan klik `Save`.
+   - Masukkan nama database (`backend_assignment`) dan klik `Save`.
 
 5. **Import Database Dump**:
-   - Klik kanan pada database yang baru saja Anda buat (`backend_interview_assignment`).
+   - Klik kanan pada database yang baru saja Anda buat (`backend_assignment`).
    - Pilih `Restore`.
    - Pada tab `General`, di bagian `Filename`, klik ikon pencarian dan pilih file dump database Anda (`backend_interview_assignment.sql`).
    - Klik `Restore`.
