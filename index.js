@@ -1,15 +1,15 @@
 const express = require("express");
 const cookieParser = require("cookie-parser");
+const errorHandler = require("./middlewares/errorHandler");
+const routes = require("./routes/index");
 const app = express();
 const port = 3000;
 
-app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
+app.use(express.json());
 app.use(cookieParser());
-
-app.get("/", (req, res) => {
-  res.send("Hello World!");
-});
+app.use("/api", routes);
+app.use(errorHandler);
 
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`);

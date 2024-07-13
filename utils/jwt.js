@@ -4,7 +4,7 @@ const jwt = require("jsonwebtoken");
 const secret = "rahasia";
 
 const generateToken = (payload) => {
-  return jwt.sign(payload, secret, { expiresIn: "60m" });
+  return jwt.sign(payload, secret, { expiresIn: "10m" });
 };
 
 const veryfyToken = (token) => {
