@@ -22,25 +22,37 @@
      PORT=3000
      ```
 
-3. **Setup Database**:
+3. **Setup Database** :
+   -Install PostgreSQL dan pgAdmin4** jika belum terinstal.
+   -Buka pgAdmin4** dan login.
+   - Klik kanan pada `Servers` di panel kiri.
+   - Pilih `Create` > `Server`.
+   - Masukkan nama untuk server dan klik `Connection`.
+   - Isi detail koneksi dengan:
+     - `Host name/address`: `localhost`
+     - `Port`: `5432`
+     - `Maintenance database`: `postgres`
+     - `Username`: `postgres`
+     - `Password`: (isi dengan password PostgreSQL Anda)
+   - Klik `Save`.
 
-   - Install PostgreSQL jika belum terinstal.
-   - Buat database baru:
-     ```bash
-     createdb backend_interview_assignment
-     ```
-   - Import database dump:
-     ```bash
-     psql -U postgres -d backend_interview_assignment -f database_dump.sql
-     ```
+4. **Buat Database Baru**:
+   - Klik kanan pada server yang baru dibuat.
+   - Pilih `Create` > `Database`.
+   - Masukkan nama database (`backend_interview_assignment`) dan klik `Save`.
 
-4. **Install Dependencies**:
+5. **Import Database Dump**:
+   - Klik kanan pada database yang baru saja Anda buat (`backend_interview_assignment`).
+   - Pilih `Restore`.
+   - Pada tab `General`, di bagian `Filename`, klik ikon pencarian dan pilih file dump database Anda (`backend_interview_assignment.sql`).
+   - Klik `Restore`.
 
+6. **Install Dependencies**:
    ```bash
    npm install
    ```
 
-5. **Run the Application**:
+7. **Run the Application**:
    ```bash
    npm run dev
    ```
@@ -58,4 +70,3 @@
 ## Database
 
 - Pastikan database PostgreSQL telah di-set up dengan konfigurasi yang benar.
-- File `database_dump.sql` berisi data awal untuk setup database.
