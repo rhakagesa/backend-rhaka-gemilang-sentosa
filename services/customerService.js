@@ -79,8 +79,7 @@ module.exports = class customerService {
       await orderItemRepository.create(orderItemData);
     });
 
+    cart = [];
     return order;
   }
-
-  cart = [];
 };
