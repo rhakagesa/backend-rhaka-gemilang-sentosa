@@ -1,4 +1,4 @@
-# backend-task-interview
+# backend-task
 
 ## How to Install
 
